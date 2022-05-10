@@ -10,12 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 var folder = Environment.SpecialFolder.LocalApplicationData;
 var path = Environment.GetFolderPath(folder);
-var dbPath = System.IO.Path.Join(path, "blogging.db");
+var dbPath = System.IO.Path.Join(path, "playlistapi.db");
 
 builder.Services.AddControllers().AddJsonOptions(x =>
-                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles); ;
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 builder.Services.AddDbContext<PlaylistWorkshopContext>(opt =>
-    opt.UseInMemoryDatabase("MyDatabase"));
+    opt.UseSqlite($"Data Source={dbPath}"));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

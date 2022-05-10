@@ -4,6 +4,10 @@ namespace PlaylistsWorkshop.Model
 {
     public class PlaylistWorkshopContext : DbContext
     {
+
+        public DbSet<Playlist> Playlists { get; set; }
+        public DbSet<Song> Songs { get; set; }
+
         public PlaylistWorkshopContext(DbContextOptions<PlaylistWorkshopContext> options) : base(options)
         {
         }
@@ -15,8 +19,5 @@ namespace PlaylistsWorkshop.Model
                 .WithOne()
                 .IsRequired();
         }
-
-        public DbSet<Playlist> Playlists { get; set; }
-        public DbSet<Song> Songs { get; set; }
     }
 }
